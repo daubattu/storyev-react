@@ -1,0 +1,39 @@
+.container {
+  :global {
+    .ant-layout {
+      min-height: 100vh;
+      display: flex;
+      header {
+        box-shadow: 0 1px 4px rgba(0,21,41,.08);
+        overflow: hidden;
+        z-index: 1;
+        .header-left {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          a.logo {
+            display: none;
+          }
+          .trigger {
+            font-size: 20px;
+            padding: 0 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+          }
+          @media only screen and (max-width: 576px) {
+            a.logo {
+              display: inline-block;
+              padding-left: 24px;
+              img {
+                width: 32px;
+              }
+            }
+          }
+        }
+      }
+      main {
+        flex: 1;
+      }
+    }
+  }
+}
