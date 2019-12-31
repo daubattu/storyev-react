@@ -7,7 +7,7 @@ git:
 cache: npm
 deploy:
   - provider: script
-    script: bash ./deploy.sh
+    script: ./deploy.sh
     skip_cleanup: true
     on:
       master: true
