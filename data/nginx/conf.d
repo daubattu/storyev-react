@@ -1,11 +1,7 @@
 server {
   listen 80;
-  server_name storyev.tk;
+  server_name storyev.tk www.storyev.tk;
   server_tokens off;
-
-  location /.well-known/acme-challenge/ {
-    root /var/www/certbot;
-  }
 
   location / {
     return 301 https://$host$request_uri;
@@ -14,7 +10,7 @@ server {
 
 server {
   listen 443 ssl;
-  server_name storyev.tk;
+  server_name storyev.tk www.storyev.tk;
   server_tokens off;
 
   ssl_certificate /etc/letsencrypt/live/storyev.tk/fullchain.pem;
