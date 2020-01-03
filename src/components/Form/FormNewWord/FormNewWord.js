@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Col, Row, Upload, Icon } from "antd";
+import { Form, Input, Button, Col, Row, Upload, Icon, Select } from "antd";
 import FormItem from "../FormItem";
 
 import useForm from "hooks/useForm";
@@ -8,12 +8,14 @@ import styles from "./FormNewWord.module.scss";
 import { uploadService } from "services";
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 const initialForm = {
   word: "",
   spelling: "",
-  // part_id: "",
-  // story_id: "",
+  type: "",
+  part: "",
+  story_id: "",
   audio_us: "",
   audio_uk: "",
   example: ""
@@ -32,6 +34,24 @@ const validators = {
       message: "This field is required!"
     }
   ],
+  type: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  part: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  story_id: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
   audio_us: [
     {
       type: "required",
@@ -44,18 +64,6 @@ const validators = {
       message: "This field is required!"
     }
   ],
-  // part_id: [
-  //   {
-  //     type: "required",
-  //     message: "This field is required!"
-  //   }
-  // ],
-  // story_id: [
-  //   {
-  //     type: "required",
-  //     message: "This field is required!"
-  //   }
-  // ],
   example: [
     {
       type: "required",
@@ -65,7 +73,7 @@ const validators = {
 };
 
 export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
-  const [{ values, errors }, { onSubmit, onChange }] = useForm({
+  const [{ values, errors }, { onSubmit, onChange, setValues }] = useForm({
     fields: formValue.id ? formValue : initialForm,
     validators
   });
@@ -74,7 +82,11 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
     event.preventDefault();
     console.log(values);
     onSubmit(() => {
-      handleOnSubmit(values);
+      handleOnSubmit({
+        ...values,
+        part: Number(values.part),
+        story_id: Number(values.story_id)
+      }).then(() => setValues(initialForm));
     });
   };
 
@@ -86,7 +98,7 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
         }
       })
         .then(response => {
-          onChange(field, process.env.REACT_APP_BASE_URL + "/" + response)
+          onChange(field, process.env.REACT_APP_BASE_URL + "/" + response);
           onSuccess();
         })
         .catch(onError);
@@ -111,14 +123,56 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
             help={errors.spelling}
           >
             <Input
-              value={values.word}
+              value={values.spelling}
               onChange={event => onChange("spelling", event.target.value)}
             />
           </FormItem>
         </Col>
       </Row>
       <Row gutter={12}>
-        <Col span={12}>
+        <Col span={8}>
+          <FormItem label="Loai tu" validateStatus="error" help={errors.type}>
+            <Select
+              value={values.type}
+              onChange={value => onChange("type", value)}
+            >
+              <Option value="Noun">Danh tu</Option>
+              <Option value="Verb">Dong tu</Option>
+              <Option value="Adj">Tinh tu</Option>
+              <Option value="Adv">Trang tu</Option>
+            </Select>
+          </FormItem>
+        </Col>
+        <Col span={8}>
+          <FormItem label="Phan" validateStatus="error" help={errors.part}>
+            <Select
+              value={values.part}
+              onChange={value => onChange("part", value)}
+            >
+              <Option value="1">Phan 1</Option>
+              <Option value="2">Phan 2</Option>
+              <Option value="3">Phan 3</Option>
+              <Option value="4">Phan 4</Option>
+              <Option value="5">Phan 5</Option>
+              <Option value="6">Phan 6</Option>
+            </Select>
+          </FormItem>
+        </Col>
+        <Col span={8}>
+          <FormItem
+            label="ID truyen"
+            validateStatus="error"
+            help={errors.story_id}
+          >
+            <Input
+              value={values.story_id}
+              onChange={event => onChange("story_id", event.target.value)}
+            />
+          </FormItem>
+        </Col>
+      </Row>
+      <Row gutter={12}>
+        <Col span={8}>
           <FormItem
             label="Audio US"
             validateStatus="error"
@@ -139,13 +193,21 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
             </Upload>
           </FormItem>
         </Col>
-        <Col span={12}>
+        <Col span={8}>
           <FormItem
             label="Audio UK"
             validateStatus="error"
             help={errors.audio_uk}
           >
-            <Upload onChange={event => console.log(event)}>
+            <Upload
+              accept="audio/*"
+              showUploadList={{ showDownloadIcon: false }}
+              customRequest={({ onSuccess, onError, file, onProgress }) =>
+                customRequest({ onSuccess, onError, file, onProgress })(
+                  "audio_uk"
+                )
+              }
+            >
               <Button>
                 <Icon type="upload" /> Chon file
               </Button>

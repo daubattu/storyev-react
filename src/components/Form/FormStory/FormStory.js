@@ -62,7 +62,8 @@ export default ({ handleOnSubmit, formValue = {} }) => {
     event.preventDefault();
     console.log(values);
     onSubmit(() => {
-      handleOnSubmit(values).then(() => setValues(initialForm));
+      handleOnSubmit({ ...values, part: Number(values.part) })
+        .then(() => setValues(initialForm));
     });
   };
 
@@ -100,7 +101,7 @@ export default ({ handleOnSubmit, formValue = {} }) => {
           <FormItem label="Phan" validateStatus="error" help={errors.part}>
             <Select
               value={values.part}
-              onChange={value => onChange("part", Number(value))}
+              onChange={value => onChange("part", value)}
             >
               <Option value="1">Phan 1</Option>
               <Option value="2">Phan 2</Option>
