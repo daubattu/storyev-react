@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Icon, Popconfirm } from "antd";
 
-export default ({ data, handleDelete }) => {
+export default ({ data, handleDelete, setSelected, setVisibleModal }) => {
   const columns = [
     {
       title: "Part",
@@ -44,9 +44,17 @@ export default ({ data, handleDelete }) => {
       align: "center",
       render: (_, item) => (
         <div>
+          <Icon
+            type="edit"
+            style={{ cursor: "pointer", marginRight: "5px" }}
+            onClick={() => {
+              setSelected(item);
+              setVisibleModal(true);
+            }}
+          />
           <Popconfirm
             placement="topLeft"
-            title={"Xoa tu moi" + item.word}
+            title={"Xoa tu moi " + item.word}
             onConfirm={() => handleDelete(item.id)}
             okText="Yes"
             cancelText="No"

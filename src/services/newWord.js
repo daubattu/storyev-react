@@ -10,8 +10,11 @@ const getNewWords = (query = "", params) => {
 
 const deleteNewWord = id => http.delete("/newwords/" + id)
 
+const updateNewWord = (id, newWord) => http.put(`/newwords/${id}`, newWord)
+
 export {
   addNewWord,
   getNewWords,
-  deleteNewWord
+  deleteNewWord,
+  updateNewWord
 }

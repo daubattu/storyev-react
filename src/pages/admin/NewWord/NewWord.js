@@ -24,7 +24,29 @@ export default () => {
   }, []);
 
   const handleOnSubmit = _newWord => {
-    return newWordService.addNewWord(_newWord);
+    setVisibleModal(false);
+    if (selected.id) {
+      console.log("edit");
+      return newWordService
+        .updateNewWord(selected.id, _newWord)
+        .then(newWordUpdated => {
+          setNewWords(
+            newwords.map(nw => {
+              if (nw.id === newWordUpdated.id) {
+                return {
+                  ...nw,
+                  ...newWordUpdated
+                };
+              }
+              return nw;
+            })
+          );
+        });
+    }
+
+    return newWordService
+      .addNewWord(_newWord)
+      .then(newWordCreated => setNewWords(newwords.concat(newWordCreated)));
   };
 
   const handleOnCancel = () => setVisibleModal(false);
@@ -55,6 +77,8 @@ export default () => {
         {newwords ? (
           <ListNewWord
             handleDelete={handleDelete}
+            setSelected={setSelected}
+            setVisibleModal={setVisibleModal}
             data={newwords.map(nw => ({ ...nw, key: nw.id }))}
           />
         ) : (
@@ -81,6 +105,7 @@ export default () => {
             handleOnSubmit={handleOnSubmit}
             handleOnCancel={handleOnCancel}
             formValue={selected}
+            submitText={isEdit ? "Them moi" : "Cap nhat"}
           />
         </Modal>
       </Card>

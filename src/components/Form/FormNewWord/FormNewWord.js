@@ -72,7 +72,7 @@ const validators = {
   ]
 };
 
-export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
+export default ({ handleOnSubmit, handleOnCancel, formValue = {}, submitText }) => {
   const [{ values, errors }, { onSubmit, onChange, setValues }] = useForm({
     fields: formValue.id ? formValue : initialForm,
     validators
@@ -246,7 +246,7 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {} }) => {
       <FormItem className="row-action">
         <Button onClick={handleOnCancel}>Huy</Button>
         <Button type="primary" htmlType="submit">
-          Them
+          {submitText}
         </Button>
       </FormItem>
     </Form>
