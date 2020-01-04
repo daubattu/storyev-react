@@ -136,10 +136,12 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {}, submitText }) 
               value={values.type}
               onChange={value => onChange("type", value)}
             >
-              <Option value="Noun">Danh tu</Option>
-              <Option value="Verb">Dong tu</Option>
-              <Option value="Adj">Tinh tu</Option>
-              <Option value="Adv">Trang tu</Option>
+              <Option value="Danh từ">Danh từ</Option>
+              <Option value="Động từ">Động từ</Option>
+              <Option value="Tính từ">Tính từ</Option>
+              <Option value="Trạng từ">Trạng từ</Option>
+              <Option value="Phó từ">Phó từ</Option>
+              <Option value="Giới từ">Giới từ</Option>
             </Select>
           </FormItem>
         </Col>

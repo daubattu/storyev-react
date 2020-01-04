@@ -105,7 +105,7 @@ export default () => {
             handleOnSubmit={handleOnSubmit}
             handleOnCancel={handleOnCancel}
             formValue={selected}
-            submitText={isEdit ? "Them moi" : "Cap nhat"}
+            submitText={isEdit ? "Cap nhat" : "Them moi"}
           />
         </Modal>
       </Card>
