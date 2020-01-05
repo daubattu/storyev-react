@@ -4,7 +4,7 @@ import Login from "pages/admin/Login/Login";
 import Dashboard from "pages/admin/Dashboard/Dashboard";
 import User from "pages/admin/User/User";
 import DetailUser from "pages/admin/User/DetailUser";
-import Story, { AddStory } from "pages/admin/Story";
+import Story, { AddStory, EditStory } from "pages/admin/Story";
 
 import DetailStory from "pages/admin/Story/DetailStory";
 import MainLayout from "layouts/Main";
@@ -19,6 +19,7 @@ export default (
     <RouteLayout path="/users/:id" layout={MainLayout} component={DetailUser} />
     <RouteLayout path="/stories" layout={MainLayout} component={Story} exact />
     <RouteLayout path="/stories/add" layout={MainLayout} component={AddStory} />
+    <RouteLayout path="/stories/edit/:id" layout={MainLayout} component={EditStory} />
     <RouteLayout path="/stories/:id" layout={MainLayout} component={DetailStory} />
     <RouteLayout path="/new-words" layout={MainLayout} component={NewWord} exact/>
   </Switch>

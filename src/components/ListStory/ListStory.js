@@ -1,8 +1,13 @@
 import React from "react";
 import { Table, Icon, Popconfirm } from "antd";
 
-export default ({ data, handleDelete }) => {
+export default ({ data, handleDelete, onClickEdit }) => {
   const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id"
+    },
     {
       title: "Name",
       dataIndex: "name",
@@ -19,6 +24,11 @@ export default ({ data, handleDelete }) => {
       align: "center",
       render: (_, item) => (
         <div>
+          <Icon
+            type="edit"
+            style={{ cursor: "pointer", marginRight: "5px" }}
+            onClick={() => onClickEdit(item.id)}
+          />
           <Popconfirm
             placement="topLeft"
             title={"Xoa truyen chem" + item.name}

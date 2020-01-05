@@ -27,6 +27,11 @@ const menus = [
         hiden: true        
       },
       {
+        path: "/stories/edit/:id",
+        name: "Chỉnh sửa truyen chem",
+        hiden: true        
+      },
+      {
         path: "/stories/:id",
         name: "Chi tiet truyen chem",
         hiden: true        

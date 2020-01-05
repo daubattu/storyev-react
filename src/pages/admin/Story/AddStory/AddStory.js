@@ -15,7 +15,7 @@ export default () => {
     <>
       <PageHeader />
       <Card>
-        <FormStory handleOnSubmit={handleOnSubmit} />
+        <FormStory handleOnSubmit={handleOnSubmit} submitText="Thêm mới" />
       </Card>
     </>
   );

@@ -39,6 +39,7 @@ const Story = ({ history }) => {
           <ListStory
             handleDelete={handleDelete}
             data={stories.map(s => ({ ...s, key: s.id }))}
+            onClickEdit={id => history.push(`/stories/edit/${id}`)}
           />
         ) : (
           <div
