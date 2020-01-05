@@ -9,11 +9,6 @@ export default ({ data, handleDelete }) => {
       key: "name"
     },
     {
-      title: "Part",
-      dataIndex: "part",
-      key: "part"
-    },
-    {
       title: "Audio",
       dataIndex: "audio",
       key: "audio"
