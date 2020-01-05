@@ -18,11 +18,18 @@ const initialForm = {
   story_id: "",
   audio_us: "",
   audio_uk: "",
-  example: ""
+  example: "",
+  mean: ""
 };
 
 const validators = {
   word: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  mean: [
     {
       type: "required",
       message: "This field is required!"
@@ -72,7 +79,12 @@ const validators = {
   ]
 };
 
-export default ({ handleOnSubmit, handleOnCancel, formValue = {}, submitText }) => {
+export default ({
+  handleOnSubmit,
+  handleOnCancel,
+  formValue = {},
+  submitText
+}) => {
   const [{ values, errors }, { onSubmit, onChange, setValues }] = useForm({
     fields: formValue.id ? formValue : initialForm,
     validators
@@ -129,6 +141,12 @@ export default ({ handleOnSubmit, handleOnCancel, formValue = {}, submitText }) 
           </FormItem>
         </Col>
       </Row>
+      <FormItem label="Dịch nghĩa" validateStatus="error" help={errors.mean}>
+        <Input
+          value={values.mean}
+          onChange={event => onChange("mean", event.target.value)}
+        />
+      </FormItem>
       <Row gutter={12}>
         <Col span={8}>
           <FormItem label="Loai tu" validateStatus="error" help={errors.type}>
