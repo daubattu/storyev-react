@@ -63,7 +63,11 @@ export default ({ handleOnSubmit, formValue = {}, submitText }) => {
     console.log(values);
     onSubmit(() => {
       handleOnSubmit({ ...values, part: Number(values.part) })
-        .then(() => setValues(initialForm));
+        .then(() => {
+          if (!formValue.id) {
+            setValues(initialForm)
+          }
+        });
     });
   };
 

@@ -15,7 +15,7 @@ const getStoryById = id => http.get(`/stories/${id}`)
 const editStory = _story => {
   const data = {..._story}
   delete data.id
-  http.put(`/stories/${_story.id}`, data)
+  return http.put(`/stories/${_story.id}`, data)
 }
 
 export {
