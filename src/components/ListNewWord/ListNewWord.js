@@ -24,26 +24,31 @@ export default ({ data, handleDelete, setSelected, setVisibleModal }) => {
       key: "type"
     },
     {
-      title: "Spelling",
-      dataIndex: "spelling",
-      key: "spelling"
+      title: "Spelling Bre",
+      dataIndex: "spelling_bre",
+      key: "spelling_bre"
     },
     {
-      title: "Audio US",
-      dataIndex: "audio_us",
-      key: "audio_us",
+      title: "Spelling NAme",
+      dataIndex: "spelling_name",
+      key: "spelling_name"
+    },
+    {
+      title: "Audio Bre",
+      dataIndex: "audio_bre",
+      key: "audio_bre",
       align: "center",
       render: (_, item) => (
-        <Icon type="sound" onClick={() => playAudio(item.audio_us)}/>
+        <Icon type="sound" onClick={() => playAudio(item.audio_bre)}/>
       )
     },
     {
-      title: "Audio UK",
-      dataIndex: "audio_uk",
-      key: "audio_uk",
+      title: "Audio NAmE",
+      dataIndex: "audio_name",
+      key: "audio_name",
       align: "center",
       render: (_, item) => (
-        <Icon type="sound" onClick={() => playAudio(item.audio_uk)}/>
+        <Icon type="sound" onClick={() => playAudio(item.audio_name)}/>
       )
     },
     {

@@ -12,12 +12,12 @@ const { Option } = Select;
 
 const initialForm = {
   word: "",
-  spelling: "",
+  spelling_bre: "",
   type: "",
   part: "",
   story_id: "",
-  audio_us: "",
-  audio_uk: "",
+  audio_name: "",
+  audio_bre: "",
   example: "",
   mean: ""
 };
@@ -29,13 +29,37 @@ const validators = {
       message: "This field is required!"
     }
   ],
-  mean: [
+  mean_vn: [
     {
       type: "required",
       message: "This field is required!"
     }
   ],
-  spelling: [
+  mean_en: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  spelling_bre: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  spelling_name: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  audio_bre: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
+  audio_name: [
     {
       type: "required",
       message: "This field is required!"
@@ -54,18 +78,6 @@ const validators = {
     }
   ],
   story_id: [
-    {
-      type: "required",
-      message: "This field is required!"
-    }
-  ],
-  audio_us: [
-    {
-      type: "required",
-      message: "This field is required!"
-    }
-  ],
-  audio_uk: [
     {
       type: "required",
       message: "This field is required!"
@@ -119,32 +131,93 @@ export default ({
 
   return (
     <Form onSubmit={_onSubmit} className={styles.wrapper}>
+      <FormItem label="Tu moi" validateStatus="error" help={errors.word}>
+        <Input
+          value={values.word}
+          onChange={event => onChange("word", event.target.value)}
+        />
+      </FormItem>
       <Row gutter={12}>
         <Col span={12}>
-          <FormItem label="Tu moi" validateStatus="error" help={errors.word}>
+          <FormItem
+            label="Phien am Bre"
+            validateStatus="error"
+            help={errors.spelling_bre}
+          >
             <Input
-              value={values.word}
-              onChange={event => onChange("word", event.target.value)}
+              value={values.spelling_bre}
+              onChange={event => onChange("spelling_bre", event.target.value)}
             />
           </FormItem>
         </Col>
         <Col span={12}>
           <FormItem
-            label="Phien am"
+            label="Phien am NAmE"
             validateStatus="error"
-            help={errors.spelling}
+            help={errors.spelling_name}
           >
             <Input
-              value={values.spelling}
-              onChange={event => onChange("spelling", event.target.value)}
+              value={values.spelling_name}
+              onChange={event => onChange("spelling_name", event.target.value)}
             />
           </FormItem>
         </Col>
       </Row>
-      <FormItem label="Dịch nghĩa" validateStatus="error" help={errors.mean}>
+      <Row gutter={12}>
+        <Col span={12}>
+          <FormItem
+            label="Audio Bre"
+            validateStatus="error"
+            help={errors.audio_bre}
+          >
+            <Upload
+              accept="audio/*"
+              showUploadList={{ showDownloadIcon: false }}
+              customRequest={({ onSuccess, onError, file, onProgress }) =>
+                customRequest({ onSuccess, onError, file, onProgress })(
+                  "audio_bre"
+                )
+              }
+            >
+              <Button>
+                <Icon type="upload" /> Chon file
+              </Button>
+            </Upload>
+          </FormItem>
+        </Col>
+        <Col span={12}>
+          <FormItem
+            label="Audio NAmE"
+            validateStatus="error"
+            help={errors.audio_name}
+          >
+            <Upload
+              style={{ width: "100%" }}
+              accept="audio/*"
+              showUploadList={{ showDownloadIcon: false }}
+              customRequest={({ onSuccess, onError, file, onProgress }) =>
+                customRequest({ onSuccess, onError, file, onProgress })(
+                  "audio_name"
+                )
+              }
+            >
+              <Button>
+                <Icon type="upload" /> Chon file
+              </Button>
+            </Upload>
+          </FormItem>
+        </Col>
+      </Row>
+      <FormItem label="Nghĩa TV" validateStatus="error" help={errors.mean_vn}>
         <Input
-          value={values.mean}
-          onChange={event => onChange("mean", event.target.value)}
+          value={values.mean_vn}
+          onChange={event => onChange("mean_vn", event.target.value)}
+        />
+      </FormItem>
+      <FormItem label="Nghĩa TA" validateStatus="error" help={errors.mean_en}>
+        <Input
+          value={values.mean_en}
+          onChange={event => onChange("mean_en", event.target.value)}
         />
       </FormItem>
       <Row gutter={12}>
@@ -191,72 +264,6 @@ export default ({
           </FormItem>
         </Col>
       </Row>
-      <Row gutter={12}>
-        <Col span={8}>
-          <FormItem
-            label="Audio US"
-            validateStatus="error"
-            help={errors.audio_us}
-          >
-            <Upload
-              accept="audio/*"
-              showUploadList={{ showDownloadIcon: false }}
-              customRequest={({ onSuccess, onError, file, onProgress }) =>
-                customRequest({ onSuccess, onError, file, onProgress })(
-                  "audio_us"
-                )
-              }
-            >
-              <Button>
-                <Icon type="upload" /> Chon file
-              </Button>
-            </Upload>
-          </FormItem>
-        </Col>
-        <Col span={8}>
-          <FormItem
-            label="Audio UK"
-            validateStatus="error"
-            help={errors.audio_uk}
-          >
-            <Upload
-              accept="audio/*"
-              showUploadList={{ showDownloadIcon: false }}
-              customRequest={({ onSuccess, onError, file, onProgress }) =>
-                customRequest({ onSuccess, onError, file, onProgress })(
-                  "audio_uk"
-                )
-              }
-            >
-              <Button>
-                <Icon type="upload" /> Chon file
-              </Button>
-            </Upload>
-          </FormItem>
-        </Col>
-      </Row>
-      {/* <Row gutter={12}>
-        <Col span={12}>
-          <FormItem label="Phan" validateStatus="error" help={errors.part_id}>
-            <Input
-              value={values.part_id}
-              onChange={event => onChange("part_id", event.target.value)}
-            />
-          </FormItem>
-        </Col>
-        <Col span={12}>
-          <FormItem
-            label="Truyen"
-            validateStatus="error"
-            help={errors.story_id}
-          >
-            <Input
-              value={values.story_id}
-              onChange={event => onChange("story_id", event.target.value)}
-            />
-          </FormItem>
-        </Col>
-      </Row> */}
       <FormItem label="Vi du" validateStatus="error" help={errors.example}>
         <TextArea
           value={values.example}
