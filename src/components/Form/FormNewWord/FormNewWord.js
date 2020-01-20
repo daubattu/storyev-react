@@ -29,6 +29,12 @@ const validators = {
       message: "This field is required!"
     }
   ],
+  word_in_content: [
+    {
+      type: "required",
+      message: "This field is required!"
+    }
+  ],
   mean_vn: [
     {
       type: "required",
@@ -131,12 +137,24 @@ export default ({
 
   return (
     <Form onSubmit={_onSubmit} className={styles.wrapper}>
-      <FormItem label="Tu moi" validateStatus="error" help={errors.word}>
-        <Input
-          value={values.word}
-          onChange={event => onChange("word", event.target.value)}
-        />
-      </FormItem>
+      <Row gutter={12}>
+        <Col span={12}>
+          <FormItem label="Tu moi" validateStatus="error" help={errors.word}>
+            <Input
+              value={values.word}
+              onChange={event => onChange("word", event.target.value)}
+            />
+          </FormItem>
+        </Col>
+        <Col span={12}>
+          <FormItem label="Tu trong truyện" validateStatus="error" help={errors.word_in_content}>
+            <Input
+              value={values.word_in_content}
+              onChange={event => onChange("word_in_content", event.target.value)}
+            />
+          </FormItem>
+        </Col>
+      </Row>
       <Row gutter={12}>
         <Col span={12}>
           <FormItem
